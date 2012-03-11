@@ -1,7 +1,31 @@
 body{
   margin:0;
+  font: 12pt "ubuntu-sans" sans-serif;
+}
+
+#contaner{
+  min-width: 400px;
 }
 
 #header{
-  background:yellow;
+  background:#E78D76;
+  padding:20px;
+  font-size: 20pt;
+  padding: 10px;
+}
+
+#sidebar{
+  background:#E79883;
+  float: left;
+  width: 150px;
+  padding: 10px;
+}
+
+#stuff{
+  padding:10px;
+  float: left;
+}
+
+.clear{
+  clear:both;
 }
