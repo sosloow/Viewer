@@ -1,5 +1,4 @@
-require 'rubygems'
 require 'bundler'
-require './base'
+require "./base"
 
-run App
+run Sinatra::Application
