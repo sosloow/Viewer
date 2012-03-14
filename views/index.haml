@@ -1,5 +1,7 @@
 #main
   -@comics.each do |comic|
-    %p= comic.title
+    .comic
+      %p= comic.title
+      %img{src: comic.images[0]}
 
     

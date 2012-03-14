@@ -2,23 +2,12 @@ require 'sinatra'
 require 'haml'
 require 'mongo_mapper'
 
-MongoMapper.config = { 
-  'dev' => { 'uri' => ENV['MONGOHQ_URL'] } }
-MongoMapper.connect('dev')
-
-
-get '/' do
-  @comics = Comic.all
-  haml :index
-end
-
-
 helpers do
   def get_pics(path)
 	  if path.empty? then
 	    pics = Dir["*.*"]
     else
-      pics = Dir.entries(path)
+      pics = Dir.entries(path).map{ |file| (path+'/'+file).gsub('public/','')}
     end
     pics.keep_if{|file| file.match(/(.jpg|.png|.gif|.jpeg)$/)}
     pics
@@ -29,7 +18,7 @@ helpers do
     dirs = Dir.entries(path).keep_if{ |entry| File.directory?("#{path}/#{entry}") && entry!='.' && entry!='..' }
     dirs.each do |dir|
       pics = get_pics("#{path}/#{dir}")
-      name = dir.gsub(/\s*(\[.*?\]|\(.*?\))\s*/,'').match(/[\w\d\s\?\.:;'",@%&\<\>-]*/)
+      name = dir.gsub(/[\s_]*(\[.*?\]|\(.*?\))[\s_]*/,'').match(/[\w\d\s\?\.:;'",@%&\<\>-]*/)
       if name.class == Array then
         name = name[0].to_s
       else
@@ -39,8 +28,12 @@ helpers do
     end
     result
   end
+  
+  def fill_db 
+    hash = get_all_pics('mango')
+  end
+  
 end
-
 
 
 class Comic
@@ -48,10 +41,21 @@ class Comic
 
   key :title, String, required: true
   key :images, Array, required: true
+
+#  many :tag 
 end
 
-class Source_folder
-  include MongoMapper::Document
-  
-  key :path, String required: true
+MongoMapper.config = { 
+  'dev' => { 'uri' => ENV['MONGOHQ_URL'] } }
+MongoMapper.connect('dev')
+
+
+get '/' do
+  Comic.delete_all
+  get_all_pics('public/manga').each do |title, pics|
+    Comic.create :title => title, :images => pics
+  end
+
+  @comics = Comic.all
+  haml :index
 end
