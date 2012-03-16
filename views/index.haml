@@ -1,7 +1,12 @@
 #main
   -@comics.each do |comic|
     .comic
-      %p= comic.title
       %img{src: comic.images[0]}
-
-    
+      .info
+        %h4= comic.title
+        %p= comic.description if comic.respond_to?('description')
+        .tags
+        -comic.tagged.each do |tag| 
+          %a{href: '#'}= tag.name
+        %a.add_tag{href: ('/reader/'+comic.id)} Add a tag  
+      .clear  
