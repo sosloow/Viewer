@@ -62,3 +62,7 @@ body{
 #editor img{
   max-width: 200px;
 }
+
+#reader img{
+  max-width: 100%;
+}

@@ -30,7 +30,6 @@ class App < Sinatra::Base
     comic.set description: params[:descr]
     comic.have_many_tags params[:tags]
     redirect to '/'
-
   end
 
   run! if app_file == $0
