@@ -4,18 +4,27 @@ body{
 }
 
 #contaner{
-  min-width: 400px;
+  margin: 20px auto auto;
+  width: 950px;
+	border: solid 1px;
 }
 
+.shadow {
+  -moz-box-shadow:    3px 3px 2px 3px #ccc;
+  -webkit-box-shadow: 3px 3px 2px 3px #ccc;
+  box-shadow:         3px 3px 2px 3px #ccc;
+}
+
+#contaner1{
+  margin: 40px 40px 40px 70px;
+	border: solid 1px;
+}  
+
 #header{
-  background:#E78D76;
-  padding:20px;
-  font-size: 20pt;
-  padding: 10px;
+ height: 300px;
 }
 
 #sidebar{
-  background:#E79883;
   float: left;
   width: 150px;
   padding: 10px;
@@ -23,6 +32,9 @@ body{
 }
 
 #stuff{
+}
+
+#main{
   padding:10px;
   float: left;
 }
@@ -45,4 +57,8 @@ body{
 
 .comic{
   padding: 10px;
+}
+
+#editor img{
+  max-width: 200px;
 }

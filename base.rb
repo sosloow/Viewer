@@ -14,16 +14,25 @@ class App < Sinatra::Base
     haml :index
   end
 
-  get '/reader/:id' do |id|
-    p @comic = Comic.first(id: id)
-    haml :reader, locals: {comic: @comic}
+  get '/manga' do 
+    @comic = Comic.first(id: params[:id])
+    
+    case params[:e]
+    when 'read'
+      haml :reader, locals: {comic: @comic}
+    when 'edit'
+      haml :editor, locals: {comic: @comic}
+    end
   end
 
-  get '/edit/:id' do |id|
-    p @comic = Comic.first(id: id)
-    haml :editor
+  post '/manga' do
+    comic = Comic.first id: params[:id]
+    comic.set description: params[:descr]
+    comic.have_many_tags params[:tags]
+    redirect to '/'
+
   end
 
   run! if app_file == $0
-
+  
 end

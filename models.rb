@@ -37,11 +37,25 @@ class Comic
     if tag.nil? then
       tag = Tag.create name: tag_name
     end
-    tag.push tagged: id
+    tag.push(tagged: id) unless self.tagged? tag_name
   end
 
-  def tagged
-    Tag.all(tagged: id)
+  def have_many_tags(string)
+    string.split(' ').each do |tag|
+      have_tag tag
+    end
+  end  
+
+  def all_tags
+    Tag.all tagged: id
+  end
+
+  def tagged?(tag_name)
+    Tag.first name: tag_name, tagged: id
+  end
+
+  def tags_string
+    all_tags.map{ |tag| tag.name}.join(' ')
   end
 
 end
@@ -57,7 +71,15 @@ class Tag
   end
 
   def on_comics
-    
+    result = []
+    tagged.each do |title_id|
+      result << Comic.first(id: title_id)
+    end
+    result
+  end
+
+  def counter
+    on_comics.size
   end
 
 end
