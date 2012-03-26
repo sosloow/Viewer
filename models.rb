@@ -1,7 +1,7 @@
 require 'mongo_mapper'
 
-MongoMapper.config = { 'dev' => { 'uri' => ENV['MONGOHQ_URL'] } }
-MongoMapper.connect('dev')
+MongoMapper.config = { ENV['RACK_ENV'] => { 'uri' => ENV['MONGOHQ_URL'] } }
+MongoMapper.connect(ENV['RACK_ENV'])
 
 class Comic
   include MongoMapper::Document

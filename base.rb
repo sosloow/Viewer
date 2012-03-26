@@ -1,6 +1,6 @@
 require 'sinatra/base'
 require 'haml'
-require './models' 
+require_relative 'models' 
 
 class App < Sinatra::Base
 
