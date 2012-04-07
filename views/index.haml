@@ -1,17 +1,12 @@
-#sidebar
-  #tag_cloud
-    -Tag.all.each do |tag|
-      %a{href: '#'}= tag.name
-#main
-  -@comics.each do |comic|
-    .comic
-      %a{href: "manga?id=#{comic.id}&e=read"}
-        %img{src: comic.images[0]}
-      .info
-        %h4= comic.title
-        %p= comic.description if comic.respond_to?('description')
-        .tags
-          -comic.all_tags.each do |tag| 
-            %a{href: '#'}= tag.name
-          %a.edit_button{href: "/manga?id=#{comic.id}&e=edit"} Edit entry
-      .clear  
+#block1
+  #c1.frame= lorem
+  #r1
+    #c2.frame= lorem
+    #c3.frame= lorem
+#block2.clear
+  #c4.frame= lorem
+  #c5.frame= lorem
+  #c6.frame= lorem
+#block.clear
+  #c7.frame= lorem
+  #c8.frame= lorem

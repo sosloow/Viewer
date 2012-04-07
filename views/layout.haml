@@ -1,10 +1,12 @@
 !!!
-%head
-  %title Viewer
-  %link(href="stylesheets/main.css" rel="stylesheet" type="text/css")
-%body
-  #contaner.shadow
-    #contaner1
-      #header Viewer
-      #stuff= yield
-      #footer.clear
+%html
+  %head
+    %title Viewer
+    %link(href="stylesheets/main.css" rel="stylesheet" type="text/css")
+  %body
+    #contaner.shadow
+      #contaner1
+        #header.frame Five Minutes Manga
+        =partial :menu
+        #stuff=yield
+        #footer.clear

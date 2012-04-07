@@ -7,10 +7,12 @@ class Comic
   include MongoMapper::Document
 
   key :title, String, required: true
-  key :images, Array, required: true
+  key :path, String
+  key :images, Array
   key :description, String
 
-  many :tags, :in => :tag_id
+  many :tags
+  many :comments
 
   def self.get_pics(path)
     if path.empty? then
@@ -81,6 +83,16 @@ class Tag
   def counter
     on_comics.size
   end
+
+end
+
+class Comment 
+  include MongoMapper::Document
+  belongs_to :comic
+
+  key :body, String, required: true
+  key :poster, String
+  timestamps!
 
 end
 

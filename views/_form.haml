@@ -1,0 +1,6 @@
+%form{ method: 'post'}
+  .label Edit description
+  %input{type: 'text', name: 'descr', value: comic.description}
+  .label Edit tags
+  %input{type: 'text', name: 'tags', value: comic.tags_string}
+  %input{type: 'submit', value: 'submit'}

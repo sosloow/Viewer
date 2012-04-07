@@ -6,3 +6,12 @@
 #reader
   -comic.images.each do |path|
     %img{src: path}
+#comments
+  -unless comic.comments.nil? then
+    -comic.comments.each do |comment|
+      %p= comment.poster
+      %p= comment.body
+  %form{method: 'post'}
+    %input{ type: 'text', name: 'poster'}
+    %input{ type: 'text', name: 'body'}
+    %input{ type: 'submit', value: 'submit'}  
